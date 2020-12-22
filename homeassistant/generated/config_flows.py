@@ -101,6 +101,7 @@ FLOWS = [
     "hyperion",
     "iaqualink",
     "icloud",
+    "idealservice_waste",
     "ifttt",
     "insteon",
     "ios",

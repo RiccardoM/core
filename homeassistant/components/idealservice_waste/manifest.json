@@ -1,0 +1,10 @@
+{
+  "domain": "idealservice_waste",
+  "name": "IdealService Waste",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/idealservice_waste",
+  "requirements": [],
+  "codeowners": [
+    "@RiccardoM"
+  ]
+}

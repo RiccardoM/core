@@ -1,0 +1,28 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "place_id": "Place ID",
+          "calendar_id": "Calendar ID"
+        }
+      }
+    },
+    "error": {
+      "generic_config_error": "Ops! Something went wrong, please try again",
+      "invalid_place_id_or_calendar_id": "Invalid place or calendar id"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+        },
+        "title": "Configure Recollect Waste"
+      }
+    }
+  }
+}
