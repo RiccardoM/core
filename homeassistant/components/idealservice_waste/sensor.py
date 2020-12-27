@@ -1,4 +1,5 @@
 """Support for ReCollect Waste sensors."""
+import datetime
 from typing import Callable, List
 
 import voluptuous as vol
@@ -17,8 +18,11 @@ from .client import PickupType
 from .const import CONF_CALENDAR_ID, CONF_PLACE_ID, DATA_COORDINATOR, DOMAIN, LOGGER
 
 ATTR_NEXT_PICKUP_DATE = "next_pickup_date"
+ATTR_DAYS_DIFF = "days_diff"
+ATTR_DATE = "date"
 ATTR_NEXT_PICKUP_TYPES = "next_pickup_types"
-ATTR_NEXT_PICKUP_TYPES_STRING = "next_pickup_types_string"
+ATTR_LIST = "list"
+ATTR_STRING = "string"
 
 DEFAULT_ATTRIBUTION = "Pickup data provided by IdealService Waste"
 DEFAULT_NAME = "idealservice_waste"
@@ -124,8 +128,13 @@ class IdealServiceWasteSensor(CoordinatorEntity):
         self._state = pickup_event.date
         self._attributes.update(
             {
-                ATTR_NEXT_PICKUP_DATE: str(pickup_event.date),
-                ATTR_NEXT_PICKUP_TYPES: pickup_events_names,
-                ATTR_NEXT_PICKUP_TYPES_STRING: ", ".join(pickup_events_names),
+                ATTR_NEXT_PICKUP_DATE: {
+                    ATTR_DATE: str(pickup_event.date),
+                    ATTR_DAYS_DIFF: (pickup_event.date - datetime.date.today()).days,
+                },
+                ATTR_NEXT_PICKUP_TYPES: {
+                    ATTR_LIST: pickup_events_names,
+                    ATTR_STRING: ", ".join(pickup_events_names),
+                },
             }
         )
