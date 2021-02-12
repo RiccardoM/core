@@ -6,7 +6,7 @@ import voluptuous as vol
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
-from homeassistant.const import ATTR_ATTRIBUTION
+from homeassistant.const import ATTR_ATTRIBUTION, ATTR_FRIENDLY_NAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.update_coordinator import (
@@ -15,7 +15,14 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .client import PickupType
-from .const import CONF_CALENDAR_ID, CONF_PLACE_ID, DATA_COORDINATOR, DOMAIN, LOGGER
+from .const import (
+    CONF_CALENDAR_ID,
+    CONF_PLACE_ID,
+    DATA_COORDINATOR,
+    DOMAIN,
+    FRIENDLY_NAME,
+    LOGGER,
+)
 
 ATTR_NEXT_PICKUP_DATE = "next_pickup_date"
 ATTR_DAYS_DIFF = "days_diff"
@@ -79,7 +86,10 @@ class IdealServiceWasteSensor(CoordinatorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry: ConfigEntry) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
-        self._attributes = {ATTR_ATTRIBUTION: DEFAULT_ATTRIBUTION}
+        self._attributes = {
+            ATTR_ATTRIBUTION: DEFAULT_ATTRIBUTION,
+            ATTR_FRIENDLY_NAME: FRIENDLY_NAME,
+        }
         self._entry = entry
         self._state = None
 
